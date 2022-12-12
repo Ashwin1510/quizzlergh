@@ -1,16 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
-
-
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Color.fromARGB(255, 13, 14, 51),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -23,45 +22,29 @@ class Quizzler extends StatelessWidget {
 }
 
 class QuizPage extends StatefulWidget {
-
-
-
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> {
-
-    List<Icon> scoreKeeper = [
-     Icon(
-              Icons.check,
-              color: Colors.red,
-            ),
-
-            Icon(
-              Icons.close,
-              color: Colors.orange,
-            ),   
-
-            Icon(
-              Icons.close,
-              color: Colors.orange,
-            ),        
-
-
-            Icon(
-              Icons.close,
-              color: Colors.orange,
-            ),        
-
-
-            Icon(
-              Icons.close,
-              color: Colors.orange,
-            ),        
-
-
+  List<Icon> scorkeeper = [];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.?',
+    'Approximately one quarter of human bones are in the feet.?',
+    'A slug\'s blood is green.?',
+    'our state is kerala.?',
   ];
+
+  List<bool>answers = [
+    false,
+    true,
+    true
+  ];
+
+  
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,11 +57,11 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 249, 248, 248),
                 ),
               ),
             ),
@@ -89,8 +72,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: ButtonStyle(
-             backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
-             ),            
+                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 10, 100, 13))),
               child: Text(
                 'True',
                 style: TextStyle(
@@ -100,14 +82,19 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+
+                bool correctAnswer = answers[questionNumber];
+
+                if(correctAnswer = true){
+
+                  print('ur got it');
+                }else{
+                  print('ur got a wrong');
+                }
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.blue,
-                    ),
-                  );
+                  questionNumber++;
                 });
+                print(questionNumber);
               },
             ),
           ),
@@ -116,9 +103,8 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: TextButton(
-               style: ButtonStyle(
-             backgroundColor: MaterialStatePropertyAll<Color>(Colors.yellow),
-             ),   
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 133, 12, 3))),
               child: Text(
                 'False',
                 style: TextStyle(
@@ -127,25 +113,27 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                 //The user picked false.
+                  bool correctAnswer = answers[questionNumber];
+
+                if(correctAnswer = false){
+
+                  print('ur got it');
+                }else{
+                  print('ur got a wrong');
+                }
+               
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    ),
-                  );
+                  questionNumber++;
                 });
-                //The user picked false.
+                print(questionNumber);
               },
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
-        
-
         Row(
-          children: scoreKeeper,
-        ),      
+          children: scorkeeper,
+        )
       ],
     );
   }
@@ -156,3 +144,4 @@ question1: 'You can lead a cow down stairs but not up stairs.', false,
 question2: 'Approximately one quarter of human bones are in the feet.', true,
 question3: 'A slug\'s blood is green.', true,
 */
+
